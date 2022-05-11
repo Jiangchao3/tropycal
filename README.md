@@ -1,4 +1,4 @@
-This repository is forked from tropycal/tropycal without any change. Please use the latest version of the tropycal!
+**This repository is forked from tropycal/tropycal without any change. Please use the latest version of the tropycal!**
 # Tropycal
 Tropycal is a Python package intended to simplify the process of retrieving and analyzing tropical cyclone data, both for past storms and in real time, and is geared towards the research and operational meteorology sectors.
 
