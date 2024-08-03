@@ -2,16 +2,32 @@
 # Tropycal
 Tropycal is a Python package intended to simplify the process of retrieving and analyzing tropical cyclone data, both for past storms and in real time, and is geared towards the research and operational meteorology sectors.
 
-Tropycal can read in HURDAT2 and IBTrACS reanalysis data and operational National Hurricane Center (NHC) Best Track data and conform them to the same format, which can be used to perform climatological, seasonal and individual storm analyses. For each individual storm, operational NHC forecasts, aircraft reconnaissance data, and any associated tornado activity can be retrieved and plotted.
+Tropycal can read in HURDAT2 and IBTrACS reanalysis data and operational National Hurricane Center (NHC) Best Track data and conform them to the same format, which can be used to perform climatological, seasonal and individual storm analyses. For each individual storm, operational NHC and model forecasts, aircraft reconnaissance data, rainfall data, and any associated tornado activity can be retrieved and plotted.
+
+The latest version of Tropycal is v1.3.
 
 ## Installation
-The currently recommended method of installation is via pip:
+
+
+### Conda
+
+The currently recommended method of installation is via conda:
+
+```sh
+conda install -c conda-forge tropycal
+```
+
+### Pip
+
+Installation is also available via pip:
 
 ```sh
 pip install tropycal
 ```
 
-Tropycal can also be installed by cloning the GitHub repository:
+### From source
+
+Tropycal can also be installed from source by cloning the GitHub repository:
 
 ```sh
 git clone https://github.com/tropycal/tropycal
@@ -23,16 +39,18 @@ python setup.py install
 - matplotlib >= 2.2.2
 - numpy >= 1.14.3
 - scipy >= 1.1.0
-- pandas >= 0.23.0
-- geopy >= 1.18.1
+- pandas >= 1.3.0
 - xarray >= 0.10.7
 - networkx >= 2.0.0
 - requests >= 2.22.0
+- pyshp >= 2.1
 
 To fully leverage tropycal's plotting capabilities, it is strongly recommended to have cartopy >= 0.17.0 installed.
 
 ## Documentation
 For full documentation and examples, please refer to [Tropycal Documentation](https://tropycal.github.io/tropycal/).
+
+As of v0.3, the documentation is up-to-date following a bug that started with v0.2.5 where the documentation was not updated with each release.
 
 ## Sample Usage
 As an example, read in the North Atlantic HURDAT2 reanalysis dataset, excluding Best Track (current year's storms):
@@ -40,7 +58,7 @@ As an example, read in the North Atlantic HURDAT2 reanalysis dataset, excluding 
 ```python
 import tropycal.tracks as tracks
 
-hurdat = tracks.TrackDataset(basin='north_atlantic')
+basin = tracks.TrackDataset(basin='north_atlantic')
 ```
 
 ### Individual Storm Analysis
@@ -50,7 +68,7 @@ Individual storms can be retrieved from the dataset by calling the "get_storm" f
 Let's retrieve an instance of Hurricane Michael from 2018:
 
 ```python
-storm = hurdat_atl.get_storm(('michael',2018))
+storm = basin.get_storm(('michael',2018))
 ```
 
 This instance of Storm contains several methods that return the storm data back in different data types. The following examples will show how to retrieve 3 different data types.

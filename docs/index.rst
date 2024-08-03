@@ -12,7 +12,7 @@ Tropycal can read in HURDAT2 and IBTrACS reanalysis data and operational Nationa
 Tropycal is supported for Python >= 3.6. For examples on how to use Tropycal in a Python script, please refer to the :doc:`examples/index` page. Additional information about the data sources used and their caveats is available in the :doc:`data` page.
 
 .. warning::
-  Tropycal is a new package. The syntax of classes and methods in the library is subject to change in future releases, which will also significantly optimize performance and speed of some functionalities. As such, updates to Tropycal may not be backwards compatible.
+  This version is the first major release of Tropycal. As such, some updates are not backwards compatible. Please refer to the API Reference for the latest documentation for all functions.
 
 .. _Github: https://github.com/tropycal/tropycal/issues
 
@@ -30,7 +30,7 @@ Tropycal is supported for Python >= 3.6. For examples on how to use Tropycal in 
 Latest Version
 ==============
 
-The latest version of Tropycal as of 12 September 2020 is v0.2.4. This documentation is valid for the latest version of Tropycal.
+The latest version of Tropycal as of 17 June 2024 is v1.3. This documentation is valid for the latest version of Tropycal.
 
 Indices and tables
 ==================

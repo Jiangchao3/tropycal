@@ -10,8 +10,10 @@ API Reference
 
    tropycal.tracks
    tropycal.tornado
+   tropycal.rain
    tropycal.recon
    tropycal.realtime
+   tropycal.ships
    tropycal.utils
    
 ===============

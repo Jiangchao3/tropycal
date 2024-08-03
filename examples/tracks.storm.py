@@ -3,8 +3,6 @@
 Individual Storm Analysis
 =========================
 This sample script illustrates how to retrieve a single storm from the HURDAT2 dataset, and make plots and analyses of this storm.
-
-For documentation generation purposes, return_ax must be set True for plotting functions. You don't need to have this extra argument in every plotting function call (e.g., "storm.plot(return_ax=True)" will produce the same output as "storm.plot()").
 """
 
 import tropycal.tracks as tracks
@@ -17,7 +15,7 @@ import datetime as dt
 # 
 # HURDAT data is not available for the most recent hurricane seasons. To include the latest data up through today, the "include_btk" flag  would need to be set to True, which reads in preliminary best track data from the NHC website.
 
-hurdat_atl = tracks.TrackDataset(basin='north_atlantic',source='hurdat',include_btk=False)
+basin = tracks.TrackDataset(basin='north_atlantic',source='hurdat',include_btk=False)
 
 ###########################################
 # Individual storm analysis
@@ -26,7 +24,12 @@ hurdat_atl = tracks.TrackDataset(basin='north_atlantic',source='hurdat',include_
 # 
 # Let's retrieve an instance of Hurricane Michael from 2018:
 
-storm = hurdat_atl.get_storm(('michael',2018))
+storm = basin.get_storm(('michael',2018))
+
+###########################################
+# We can quickly visualize what the Storm object contains by printing it:
+
+print(storm)
 
 ###########################################
 # This instance of Storm contains several methods that return the storm data back in different data types. The following examples will show # how to retrieve 3 different data types.
@@ -48,14 +51,12 @@ print(storm.to_dataframe())
 ###########################################
 # Visualize Michael's observed track with the "plot" function:
 # 
-# Note that you can pass various arguments to the plot function, such as customizing the map and track aspects. The only cartopy projection # currently offered is PlateCarree. Read through the documentation for more customization options.
+# Note that you can pass various arguments to the plot function, such as customizing the map and track aspects. The "Customizing Storm Plots" example script has more examples on how to customize this plot. Read through the documentation for more customization options.
 
-storm.plot(return_ax=True)
+storm.plot()
 
 ###########################################
 # Plot the tornado tracks associated with Michael, along with the accompanying daily practically perfect forecast (PPH):
-# 
-# Note: There is currently a bug with this function that outputs 2 axes, a filled one and a blank one. This will be fixed in future updates.
 
 storm.plot_tors(plotPPH=True)
 
@@ -77,14 +78,21 @@ disco = storm.get_nhc_discussion(forecast=2)
 # 
 # Let's plot Michael's second forecast cone:
 
-storm.plot_nhc_forecast(forecast=2,return_ax=True)
+storm.plot_nhc_forecast(forecast=2)
 
 ###########################################
 # Now let's look at the 12th forecast for Michael.
 # 
 # Note that the observed track here differs from the HURDAT2 track plotted previously! This is because this plot displays the operationally analyzed location and intensity, rather than the post-storm analysis data. This is done to account for differences between HURDAT2 and operational data.
 
-storm.plot_nhc_forecast(forecast=12,return_ax=True)
+storm.plot_nhc_forecast(forecast=12)
+
+###########################################
+# To get the raw NHC forecast data, we can use the ``get_nhc_forecast_dict()`` method, and provide a date for the requested forecast.
+#
+# This is a subset of the ``get_operational_forecasts()`` method, which pulls in all available forecasts whether NHC, deterministic model or ensemble members.
+
+storm.get_nhc_forecast_dict(dt.datetime(2018,10,9,18))
 
 ###########################################
 # IBTrACS Dataset
@@ -108,7 +116,7 @@ ibtracs = tracks.TrackDataset(basin='all',source='ibtracs',ibtracs_mode='jtwc_ne
 # .. _Super Typhoon Haiyan: https://en.wikipedia.org/wiki/Typhoon_Haiyan
 
 storm = ibtracs.get_storm(('haiyan',2013))
-storm.plot(return_ax=True)
+storm.plot()
 
 ###########################################
 # `Cyclone Catarina`_ (2004) was an extremely rare hurricane-force tropical cyclone that developed in the South Atlantic basin, which normally doesn't see tropical cyclone activity, and subsequently made landfall in Brazil. The "Catarina" name is unofficial; it was not assigned a name in real time, and JTWC assigned it the ID "AL502004". Recall that when reading in the IBTrACS dataset previously, we set ``Catarina=True``. This read in data for Cyclone Catarina from a special post-storm reanalysis from McTaggart-Cowan et al. (2006). Let's make a plot of Catarina's observed track and intensity per this reanalysis:
@@ -116,7 +124,7 @@ storm.plot(return_ax=True)
 # .. _Cyclone Catarina: https://en.wikipedia.org/wiki/Hurricane_Catarina
 
 storm = ibtracs.get_storm(('catarina',2004))
-storm.plot(return_ax=True)
+storm.plot()
 
 ###########################################
 # If we were to read in IBTrACS without setting ``Catarina=True`` (which sets it to False by default) and plot the track for "AL502004", we would get a noticeably different (shorter) and weaker track.

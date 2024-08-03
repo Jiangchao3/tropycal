@@ -27,20 +27,20 @@ sys.path.insert(0, os.path.abspath('../plot'))
 # -- Project information -----------------------------------------------------
 
 project = 'tropycal'
-copyright = '2020, Tropycal Developers'
+copyright = '2023, Tropycal Developers'
 author = 'Tropycal Developers'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.2.4'
+release = '1.3'
 
 
 # -- General configuration ---------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-# needs_sphinx = '1.0'
+needs_sphinx = '2.1'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -48,6 +48,8 @@ release = '0.2.4'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
+    'sphinx.ext.coverage',
+    'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
@@ -87,6 +89,10 @@ templates_path = ['_templates']
 # source_suffix = ['.rst', '.md']
 source_suffix = '.rst'
 
+# Controlling automatically generating summary tables in the docs
+autosummary_generate = True
+autosummary_imported_members = True
+
 # The master toctree document.
 master_doc = 'index'
 
@@ -109,6 +115,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'plot.py',
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
+mathjax3_config = {'chtml': {'displayAlign': 'left'}}
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -227,3 +234,5 @@ texinfo_documents = [
 ]
 
 #--------------- autosummary -------------------------------------------------
+
+napoleon_custom_sections = [('Other Parameters','params_style')]
